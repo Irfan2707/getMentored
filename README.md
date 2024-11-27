@@ -3,7 +3,7 @@
 This platform aims to connect mentees with mentors/coaches, providing a marketplace for individuals seeking guidance and support in their quest for excellence and success.
 
 ## Description
-The Mentoring Platform by Nineleaps is a user-friendly marketplace connecting mentees with mentors and coaches. 
+The Mentoring Platform is a user-friendly marketplace connecting mentees with mentors and coaches. 
 It aims to assist young entrepreneurs in nurturing their talent and taking their ideas to the next level. Mentees can create profiles highlighting their skills and goals, enabling them to find suitable mentors. 
 The platform facilitates connections based on industry, expertise, and availability. Mentoring sessions are scheduled using the Slot Booking feature, ensuring efficient time management. 
 Both mentees and mentors can capture important points and action items during sessions using the Notes feature. 
