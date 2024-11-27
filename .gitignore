@@ -1,0 +1,31 @@
+# Maven
+target/
+mvnw
+mvnw.cmd
+.mvn/
+
+# IntelliJ IDEA
+.idea/
+
+# Eclipse
+.classpath
+.project
+.settings/
+
+# Spring Boot
+*.iml
+*.log
+logs/
+restarted.config
+
+# Application Properties
+application.properties
+application-dev.properties
+
+#other files
+.factorypath
+.attatchpid*
+Readme.md
+External Libraries
+Scratches and Consoles
+.settings

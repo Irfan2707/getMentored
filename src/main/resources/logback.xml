@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <property name="LOGS" value="./logs"/>
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss} [%thread] %highlight(%-5level) %cyan(%logger{36}) - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+    <!-- Async Console Appender -->
+    <appender name="AsyncConsole" class="ch.qos.logback.classic.AsyncAppender">
+        <appender-ref ref="Console"/>
+    </appender>
+
+
+    <!-- Main Appender -->
+    <appender name="RfAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/allLogs.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Roll daily and when the file reaches 10 Mb -->
+            <fileNamePattern>${LOGS}/archived/%d{dd-MM-yyyy}.allLogs.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>2KB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+            <!-- Maximum History -->
+            <maxHistory>3</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Warn Appender -->
+    <appender name="WarnRfAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS}/errorLogs.log</file>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Roll daily and when the file reaches 10 Mb -->
+            <fileNamePattern>${LOGS}/archived/%d{dd-MM-yyyy}.warnLogs.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+            <!-- Maximum History -->
+            <maxHistory>10</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="Console"/>
+        <appender-ref ref="AsyncConsole"/>
+    </root>
+
+
+    <logger name="com.nineleaps.authentication.jwt.controller" level="debug" additivity="false">
+        <appender-ref ref="RfAppender"/>
+        <appender-ref ref="Console"/>
+        <appender-ref ref="WarnRfAppender"/>
+    </logger>
+
+</Configuration>
